@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CaribbeanBiz | Transforming Business Assets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: {
+                            DEFAULT: '#8B0023',
+                            light: '#A4002A',
+                            dark: '#6B001B',
+                            50: '#FFF0F3',
+                            100: '#FFE0E6',
+                            200: '#FFC1CC',
+                            300: '#FF92A3',
+                            400: '#FF5370',
+                            500: '#8B0023',
+                            600: '#6B001B',
+                            700: '#4D0013',
+                            800: '#2E000C',
+                            900: '#1A0007',
+                        },
+                        cream: {
+                            DEFAULT: '#FFF8E7',
+                            light: '#FFFCF5',
+                            dark: '#E6DFC0',
+                            50: '#FFFCF5',
+                            100: '#FFF8E7',
+                            200: '#F5ECD5',
+                            300: '#E6DFC0',
+                            400: '#D4C9A0',
+                        },
+                        charcoal: {
+                            DEFAULT: '#0F0F0F',
+                            light: '#1A1A1A',
+                            dark: '#080808',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0F0F0F;
+            color: #FFF8E7;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Performance: Use CSS containment for sections */
+        section {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 500px;
+        }
+
+        /* Simplified cursor - CSS only, no JS overhead */
+        @media (pointer: fine) {
+            body {
+                cursor: default;
+            }
+            a, button {
+                cursor: pointer;
+            }
+        }
+
+        /* Glassmorphism - optimized */
+        .glass-panel {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 248, 231, 0.08);
+            will-change: transform;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(45, 45, 45, 0.4) 100%);
+            border: 1px solid rgba(139, 0, 35, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(139, 0, 35, 0.5);
+            transform: translateY(-4px) translateZ(0);
+            box-shadow: 0 20px 40px rgba(139, 0, 35, 0.15);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #FFF8E7 0%, #8B0023 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FFF8E7 0%, #E6DFC0 50%, #D4C9A0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Simplified Animations - GPU accelerated */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateZ(0); }
+            50% { transform: translateY(-20px) translateZ(0); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(139, 0, 35, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 0, 35, 0.6); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        /* Logo Animation - simplified */
+        .logo-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .logo-icon {
+            transform: scale(1.05);
+        }
+
+        /* Optimized Noise Texture - static instead of animated */
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Scrollbar - optimized */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0F0F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B0023;
+            border-radius: 4px;
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(139, 0, 35, 0.3);
+            color: #FFF8E7;
+        }
+
+        /* Service Card - simplified hover effect */
+        .service-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Magnetic Button - simplified, no JS tracking */
+        .magnetic-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            will-change: transform;
+        }
+
+        .magnetic-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* Hero Background - simplified gradients */
+        .hero-bg {
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(139, 0, 35, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 248, 231, 0.02) 0%, transparent 50%),
+                #0F0F0F;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .animate-float,
+            .animate-pulse-glow {
+                animation: none;
+            }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .glass-panel {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+            .glass-card:hover {
+                transform: none;
+            }
+        }
+
+        /* Intersection Observer fade-in classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* Counter animation */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-charcoal-dark text-cream antialiased">
+
+    <!-- Noise Overlay -->
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 opacity-0 -translate-y-full">
+        <div class="glass-panel border-b border-cream/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <a href="#" class="logo-container flex items-center space-x-3 group">
+                        <div class="relative w-10 h-10 flex items-center justify-center">
+                            <svg viewBox="0 0 100 100" class="w-full h-full logo-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                                <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-display font-bold tracking-tight text-cream group-hover:text-burgundy transition-colors">
+                            Caribbean<span class="text-burgundy group-hover:text-cream">Biz</span>
+                        </span>
+                    </a>
+
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#about" class="text-sm font-medium text-cream/70 hover:text-burgundy transition-colors">About</a>
+                        <a href="#problem" class="text-sm font-medium text-cream/70 hover:text-burgundy transition-colors">Challenges</a>
+                        <a href="#solution" class="text-sm font-medium text-cream/70 hover:text-burgundy transition-colors">Methodology</a>
+                        <a href="#services" class="text-sm font-medium text-cream/70 hover:text-burgundy transition-colors">Services</a>
+                        <a href="#acquisition" class="text-sm font-medium text-cream/70 hover:text-burgundy transition-colors">Acquisition</a>
+                        <button onclick="openModal()" class="magnetic-btn px-6 py-2.5 rounded-full border border-burgundy text-burgundy hover:bg-burgundy hover:text-cream transition-all duration-300">
+                            <span class="text-sm font-semibold">Book Audit</span>
+                        </button>
+                    </div>
+
+                    <button class="md:hidden text-cream" onclick="toggleMobileMenu()">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-charcoal-dark/95 backdrop-blur-xl hidden flex-col items-center justify-center space-y-8">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-cream">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+        <a href="#about" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-cream hover:text-burgundy transition-colors">About</a>
+        <a href="#problem" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-cream hover:text-burgundy transition-colors">Challenges</a>
+        <a href="#solution" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-cream hover:text-burgundy transition-colors">Methodology</a>
+        <a href="#services" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-cream hover:text-burgundy transition-colors">Services</a>
+        <a href="#acquisition" onclick="toggleMobileMenu()" class="text-2xl font-display font-bold text-cream hover:text-burgundy transition-colors">Acquisition</a>
+        <button onclick="openModal(); toggleMobileMenu();" class="px-8 py-3 rounded-full bg-burgundy text-cream font-semibold">
+            Book Strategic Audit
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 hero-bg" style="content-visibility: visible;">
+        <!-- Animated Logo Watermark - simplified -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
+            <svg viewBox="0 0 100 100" class="w-full h-full animate-float" fill="none">
+                <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023"/>
+            </svg>
+        </div>
+
+        <!-- Decorative Elements - reduced complexity -->
+        <div class="absolute top-20 right-10 w-48 h-48 opacity-20 animate-float hidden lg:block" style="animation-delay: 0s;">
+            <svg viewBox="0 0 200 200" class="w-full h-full">
+                <path d="M100 20 L180 100 L100 180 L20 100 Z" fill="none" stroke="#8B0023" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Logo Badge -->
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel mb-8 fade-in visible">
+                <div class="w-6 h-6 relative">
+                    <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                        <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                        <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023" opacity="0.6"/>
+                    </svg>
+                </div>
+                <span class="text-sm font-medium text-cream/80 tracking-wider uppercase">Dominican Republic Based</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-[0.9] tracking-tight fade-in visible stagger-1">
+                Transforming<br>
+                <span class="text-gradient-gold">Caribbean</span><br>
+                <span class="text-burgundy">Business Assets</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-cream/60 max-w-2xl mx-auto mb-12 font-light leading-relaxed fade-in visible stagger-2">
+                We acquire, optimize, and structure traditional businesses into scalable, 
+                automated, and highly valuable enterprises ready for strategic exits.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in visible stagger-3">
+                <button onclick="openModal()" class="magnetic-btn group px-8 py-4 rounded-full bg-burgundy text-cream font-semibold text-lg hover:shadow-lg hover:shadow-burgundy/20 transition-all duration-300 flex items-center space-x-2">
+                    <span>Book Strategic Audit</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </button>
+                <button onclick="scrollToSection('about')" class="magnetic-btn px-8 py-4 rounded-full border border-cream/30 text-cream font-semibold text-lg hover:bg-cream/10 transition-all duration-300">
+                    <span>Partner With Us</span>
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto fade-in visible stagger-4">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-display font-bold text-burgundy counter-value" data-target="50">0</div>
+                    <div class="text-sm text-cream/50 mt-2 uppercase tracking-wider">Businesses Optimized</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-display font-bold text-burgundy counter-value" data-target="300">0</div>
+                    <div class="text-sm text-cream/50 mt-2 uppercase tracking-wider">Avg ROI %</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-display font-bold text-burgundy counter-value" data-target="12">0</div>
+                    <div class="text-sm text-cream/50 mt-2 uppercase tracking-wider">Countries Served</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-display font-bold text-burgundy counter-value" data-target="85">0</div>
+                    <div class="text-sm text-cream/50 mt-2 uppercase tracking-wider">Owner Independence %</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 fade-in visible stagger-5">
+            <div class="w-6 h-10 rounded-full border-2 border-cream/30 flex justify-center pt-2">
+                <div class="w-1 h-2 bg-burgundy rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase fade-in">
+                        Our Mission
+                    </div>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight fade-in stagger-1">
+                        Transforming traditional Caribbean businesses into 
+                        <span class="text-gradient">structured, scalable, and sellable assets.</span>
+                    </h2>
+                    <p class="text-lg text-cream/60 leading-relaxed fade-in stagger-2">
+                        CaribbeanBiz operates at the intersection of strategic consulting, technology implementation, and private investment. We don't just advise—we execute, optimize, and transform.
+                    </p>
+                    <p class="text-lg text-cream/60 leading-relaxed fade-in stagger-3">
+                        Based in the Dominican Republic, we understand the unique challenges and opportunities of Caribbean markets. Our approach combines global best practices with local market expertise.
+                    </p>
+
+                    <div class="flex items-center space-x-4 pt-4 fade-in stagger-4">
+                        <div class="w-12 h-12 rounded-full bg-burgundy/20 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-cream">Execution-First Approach</div>
+                            <div class="text-sm text-cream/50">Results over presentations</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative fade-in stagger-2">
+                    <div class="absolute inset-0 bg-gradient-to-br from-burgundy/20 to-transparent rounded-3xl blur-3xl"></div>
+                    <div class="relative glass-panel rounded-3xl p-8 space-y-6">
+                        <!-- Logo Feature -->
+                        <div class="w-24 h-24 mx-auto mb-6 relative">
+                            <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                                <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                                <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023" opacity="0.6"/>
+                            </svg>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-burgundy/20 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl font-bold text-burgundy">01</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-cream mb-2">Strategic Acquisition</h3>
+                                <p class="text-cream/60">We identify undervalued businesses with high optimization potential in the Caribbean region.</p>
+                            </div>
+                        </div>
+
+                        <div class="h-px bg-gradient-to-r from-transparent via-cream/20 to-transparent"></div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-burgundy/20 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl font-bold text-burgundy">02</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-cream mb-2">Digital Transformation</h3>
+                                <p class="text-cream/60">Implementing automation, data systems, and modern operational frameworks.</p>
+                            </div>
+                        </div>
+
+                        <div class="h-px bg-gradient-to-r from-transparent via-cream/20 to-transparent"></div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-burgundy/20 flex items-center justify-center flex-shrink-0">
+                                <span class="text-2xl font-bold text-burgundy">03</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-cream mb-2">Value Acceleration</h3>
+                                <p class="text-cream/60">Structuring for maximum valuation and strategic exit opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="py-32 relative bg-charcoal/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <div class="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase mb-6 fade-in">
+                    The Challenge
+                </div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 fade-in stagger-1">
+                    Why Most Caribbean Businesses<br>
+                    <span class="text-burgundy">Fail to Scale</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-8 group hover:border-burgundy/50 transition-all duration-300 fade-in" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 rounded-xl bg-burgundy/10 flex items-center justify-center mb-6 group-hover:bg-burgundy/20 transition-colors">
+                        <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3">Operational Chaos</h3>
+                    <p class="text-cream/60">Manual processes, undocumented workflows, and ad-hoc decision making create bottlenecks that prevent growth.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group hover:border-burgundy/50 transition-all duration-300 fade-in" style="transition-delay: 0.15s;">
+                    <div class="w-14 h-14 rounded-xl bg-burgundy/10 flex items-center justify-center mb-6 group-hover:bg-burgundy/20 transition-colors">
+                        <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3">Owner Dependency</h3>
+                    <p class="text-cream/60">Businesses that rely entirely on the founder cannot scale, sell, or survive leadership transitions.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group hover:border-burgundy/50 transition-all duration-300 fade-in" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 rounded-xl bg-burgundy/10 flex items-center justify-center mb-6 group-hover:bg-burgundy/20 transition-colors">
+                        <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3">Data Blindness</h3>
+                    <p class="text-cream/60">Lack of KPI tracking and analytics means decisions are based on intuition rather than measurable insights.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group hover:border-burgundy/50 transition-all duration-300 fade-in" style="transition-delay: 0.25s;">
+                    <div class="w-14 h-14 rounded-xl bg-burgundy/10 flex items-center justify-center mb-6 group-hover:bg-burgundy/20 transition-colors">
+                        <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3">Legacy Systems</h3>
+                    <p class="text-cream/60">Outdated technology stacks that are expensive to maintain and impossible to integrate with modern tools.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group hover:border-burgundy/50 transition-all duration-300 fade-in" style="transition-delay: 0.3s;">
+                    <div class="w-14 h-14 rounded-xl bg-burgundy/10 flex items-center justify-center mb-6 group-hover:bg-burgundy/20 transition-colors">
+                        <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3">Low Valuation</h3>
+                    <p class="text-cream/60">Without proper structuring and systems, businesses sell for fractions of their potential market value.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group hover:border-burgundy/50 transition-all duration-300 fade-in" style="transition-delay: 0.35s;">
+                    <div class="w-14 h-14 rounded-xl bg-burgundy/10 flex items-center justify-center mb-6 group-hover:bg-burgundy/20 transition-colors">
+                        <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3">Talent Gaps</h3>
+                    <p class="text-cream/60">Difficulty attracting and retaining talent due to unstructured roles and lack of professional development paths.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section - Process Flow -->
+    <section id="solution" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(139,0,35,0.1)_0%,_transparent_70%)]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <div class="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase mb-6 fade-in">
+                    Our Methodology
+                </div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 fade-in stagger-1">
+                    The CaribbeanBiz <span class="text-gradient">Optimization Cycle</span>
+                </h2>
+                <p class="text-xl text-cream/60 max-w-3xl mx-auto fade-in stagger-2">
+                    A systematic approach to transforming traditional businesses into high-value, automated assets
+                </p>
+            </div>
+
+            <div class="relative">
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-burgundy/30 to-transparent transform -translate-y-1/2"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+                    <div class="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden group fade-in" style="transition-delay: 0.1s;">
+                        <div class="w-16 h-16 rounded-full bg-burgundy/20 flex items-center justify-center mb-4 relative group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-cream mb-2">Diagnose</h3>
+                        <p class="text-sm text-cream/50">Deep audit of operations, finances, and systems</p>
+                        <div class="mt-4 text-3xl font-display font-bold text-burgundy/30 group-hover:text-burgundy transition-colors">01</div>
+                    </div>
+
+                    <div class="hidden lg:flex items-center justify-center">
+                        <svg class="w-8 h-8 text-burgundy/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden group fade-in" style="transition-delay: 0.2s;">
+                        <div class="w-16 h-16 rounded-full bg-burgundy/20 flex items-center justify-center mb-4 relative group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-cream mb-2">Structure</h3>
+                        <p class="text-sm text-cream/50">Organize processes, roles, and hierarchies</p>
+                        <div class="mt-4 text-3xl font-display font-bold text-burgundy/30 group-hover:text-burgundy transition-colors">02</div>
+                    </div>
+
+                    <div class="hidden lg:flex items-center justify-center">
+                        <svg class="w-8 h-8 text-burgundy/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden group fade-in" style="transition-delay: 0.3s;">
+                        <div class="w-16 h-16 rounded-full bg-burgundy/20 flex items-center justify-center mb-4 relative group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-cream mb-2">Automate</h3>
+                        <p class="text-sm text-cream/50">Implement tech systems and workflows</p>
+                        <div class="mt-4 text-3xl font-display font-bold text-burgundy/30 group-hover:text-burgundy transition-colors">03</div>
+                    </div>
+
+                    <div class="hidden lg:flex items-center justify-center">
+                        <svg class="w-8 h-8 text-burgundy/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden group fade-in" style="transition-delay: 0.4s;">
+                        <div class="w-16 h-16 rounded-full bg-burgundy/20 flex items-center justify-center mb-4 relative group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-cream mb-2">Optimize</h3>
+                        <p class="text-sm text-cream/50">Data-driven KPI improvement</p>
+                        <div class="mt-4 text-3xl font-display font-bold text-burgundy/30 group-hover:text-burgundy transition-colors">04</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-3xl mx-auto">
+                    <div class="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden group fade-in" style="transition-delay: 0.5s;">
+                        <div class="w-16 h-16 rounded-full bg-burgundy/20 flex items-center justify-center mb-4 relative group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-cream mb-2">Scale</h3>
+                        <p class="text-sm text-cream/50">Expand operations and market reach</p>
+                        <div class="mt-4 text-3xl font-display font-bold text-burgundy/30 group-hover:text-burgundy transition-colors">05</div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 text-center h-full flex flex-col items-center justify-center relative overflow-hidden border-burgundy/30 group fade-in" style="transition-delay: 0.6s;">
+                        <div class="w-16 h-16 rounded-full bg-burgundy/30 flex items-center justify-center mb-4 relative group-hover:scale-110 transition-transform duration-300 animate-pulse-glow">
+                            <svg class="w-8 h-8 text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-cream mb-2">Exit</h3>
+                        <p class="text-sm text-cream/50">Strategic sale at maximum valuation</p>
+                        <div class="mt-4 text-3xl font-display font-bold text-burgundy group-hover:text-cream transition-colors">06</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 relative bg-charcoal/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <div class="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase mb-6 fade-in">
+                    Core Services
+                </div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 fade-in stagger-1">
+                    Comprehensive <span class="text-gradient">Business Solutions</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="service-card glass-card rounded-2xl p-8 group fade-in" style="transition-delay: 0.1s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/20 to-burgundy/5 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                            </svg>
+                        </div>
+                        <span class="text-4xl font-display font-bold text-cream/10 group-hover:text-burgundy/20 transition-colors">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3 group-hover:text-burgundy transition-colors">Strategic Audit & Diagnostic</h3>
+                    <p class="text-cream/60 mb-4">Comprehensive analysis of operations, financials, and market position to identify optimization opportunities.</p>
+                    <ul class="space-y-2 text-sm text-cream/50">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Operational assessment</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Financial health check</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Market positioning</li>
+                    </ul>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 group fade-in" style="transition-delay: 0.15s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/20 to-burgundy/5 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        <span class="text-4xl font-display font-bold text-cream/10 group-hover:text-burgundy/20 transition-colors">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3 group-hover:text-burgundy transition-colors">Digital Organization</h3>
+                    <p class="text-cream/60 mb-4">Restructure workflows, documentation, and team hierarchies for maximum efficiency.</p>
+                    <ul class="space-y-2 text-sm text-cream/50">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Process mapping</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>SOP development</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Team restructuring</li>
+                    </ul>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 group fade-in" style="transition-delay: 0.2s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/20 to-burgundy/5 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <span class="text-4xl font-display font-bold text-cream/10 group-hover:text-burgundy/20 transition-colors">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3 group-hover:text-burgundy transition-colors">Automation Systems</h3>
+                    <p class="text-cream/60 mb-4">Implement cutting-edge technology to reduce manual work and human error.</p>
+                    <ul class="space-y-2 text-sm text-cream/50">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>CRM implementation</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Workflow automation</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>AI integration</li>
+                    </ul>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 group fade-in" style="transition-delay: 0.25s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/20 to-burgundy/5 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <span class="text-4xl font-display font-bold text-cream/10 group-hover:text-burgundy/20 transition-colors">04</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3 group-hover:text-burgundy transition-colors">Data Analytics & KPIs</h3>
+                    <p class="text-cream/60 mb-4">Establish metrics-driven decision making with real-time dashboards.</p>
+                    <ul class="space-y-2 text-sm text-cream/50">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Dashboard creation</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>KPI framework</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Predictive analytics</li>
+                    </ul>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 group fade-in" style="transition-delay: 0.3s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/20 to-burgundy/5 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-4xl font-display font-bold text-cream/10 group-hover:text-burgundy/20 transition-colors">05</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3 group-hover:text-burgundy transition-colors">Operational Independence</h3>
+                    <p class="text-cream/60 mb-4">Reduce owner dependency through team empowerment and systematization.</p>
+                    <ul class="space-y-2 text-sm text-cream/50">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Leadership development</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Decision frameworks</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Succession planning</li>
+                    </ul>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 group fade-in" style="transition-delay: 0.35s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/20 to-burgundy/5 flex items-center justify-center">
+                            <svg class="w-7 h-7 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-4xl font-display font-bold text-cream/10 group-hover:text-burgundy/20 transition-colors">06</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-3 group-hover:text-burgundy transition-colors">Exit Strategy & Resale</h3>
+                    <p class="text-cream/60 mb-4">Prepare businesses for high-value acquisition or strategic partnerships.</p>
+                    <ul class="space-y-2 text-sm text-cream/50">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Valuation optimization</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Investor packaging</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-burgundy mr-2"></span>Due diligence prep</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acquisition Model Section -->
+    <section id="acquisition" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-charcoal-dark via-burgundy/5 to-charcoal-dark"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <div class="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase mb-6">
+                        Acquisition Model
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
+                        We Buy, Optimize &<br>
+                        <span class="text-gradient">Scale Businesses</span>
+                    </h2>
+                    <p class="text-lg text-cream/60 mb-8 leading-relaxed">
+                        CaribbeanBiz actively acquires small to medium enterprises with strong fundamentals but operational inefficiencies. We transform them into high-performing assets.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-burgundy/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-burgundy font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-cream mb-1">Strategic Acquisition</h4>
+                                <p class="text-cream/60">We identify businesses with $1M-$10M revenue, strong market position, but operational challenges.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-burgundy/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-burgundy font-bold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-cream mb-1">Intensive Optimization</h4>
+                                <p class="text-cream/60">6-18 month transformation period implementing systems, automation, and operational excellence.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-full bg-burgundy/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-burgundy font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-cream mb-1">Value Realization</h4>
+                                <p class="text-cream/60">Strategic exit through sale to private equity, strategic buyers, or IPO preparation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 flex items-center space-x-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-display font-bold text-burgundy">24-36</div>
+                            <div class="text-sm text-cream/50">Month Timeline</div>
+                        </div>
+                        <div class="h-12 w-px bg-cream/20"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-display font-bold text-burgundy">3-5x</div>
+                            <div class="text-sm text-cream/50">Value Multiple</div>
+                        </div>
+                        <div class="h-12 w-px bg-cream/20"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-display font-bold text-burgundy">85%</div>
+                            <div class="text-sm text-cream/50">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative fade-in stagger-2">
+                    <div class="absolute inset-0 bg-gradient-to-br from-burgundy/30 to-transparent rounded-3xl blur-3xl"></div>
+                    <div class="relative glass-panel rounded-3xl p-8">
+                        <!-- Logo Watermark -->
+                        <div class="absolute top-4 right-4 w-16 h-16 opacity-10">
+                            <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                                <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                                <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023"/>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-2xl font-display font-bold text-cream mb-6">Investment Criteria</h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-charcoal/50 border border-cream/10">
+                                <span class="text-cream/80">Revenue Range</span>
+                                <span class="text-burgundy font-semibold">$1M - $10M</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-charcoal/50 border border-cream/10">
+                                <span class="text-cream/80">EBITDA Margin</span>
+                                <span class="text-burgundy font-semibold">10% - 25%</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-charcoal/50 border border-cream/10">
+                                <span class="text-cream/80">Business Age</span>
+                                <span class="text-burgundy font-semibold">5+ Years</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-charcoal/50 border border-cream/10">
+                                <span class="text-cream/80">Industries</span>
+                                <span class="text-burgundy font-semibold">Diverse</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 rounded-xl bg-charcoal/50 border border-cream/10">
+                                <span class="text-cream/80">Location</span>
+                                <span class="text-burgundy font-semibold">Caribbean Region</span>
+                            </div>
+                        </div>
+
+                        <button onclick="openModal()" class="w-full mt-6 py-4 rounded-xl bg-burgundy text-cream font-semibold hover:bg-burgundy-light transition-colors">
+                            Submit Business for Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why CaribbeanBiz -->
+    <section class="py-32 relative bg-charcoal/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 fade-in">
+                    Why <span class="text-gradient">CaribbeanBiz</span>?
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center group fade-in" style="transition-delay: 0.1s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-burgundy/20 to-transparent flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">Strategic Approach</h3>
+                    <p class="text-cream/60 text-sm">Not just consultants—we're operators who implement and execute.</p>
+                </div>
+
+                <div class="text-center group fade-in" style="transition-delay: 0.2s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-burgundy/20 to-transparent flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">Tech-Driven</h3>
+                    <p class="text-cream/60 text-sm">Cutting-edge automation and AI integration for modern operations.</p>
+                </div>
+
+                <div class="text-center group fade-in" style="transition-delay: 0.3s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-burgundy/20 to-transparent flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">Caribbean Focused</h3>
+                    <p class="text-cream/60 text-sm">Deep understanding of local markets, regulations, and culture.</p>
+                </div>
+
+                <div class="text-center group fade-in" style="transition-delay: 0.4s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-burgundy/20 to-transparent flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">Long-Term Value</h3>
+                    <p class="text-cream/60 text-sm">Sustainable growth strategies that build lasting enterprise value.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-burgundy/20 via-transparent to-burgundy/20"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(139,0,35,0.2)_0%,_transparent_70%)]"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Large Logo Watermark -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-5 pointer-events-none">
+                <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                    <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                    <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023"/>
+                </svg>
+            </div>
+
+            <h2 class="text-4xl md:text-6xl font-display font-bold mb-6 leading-tight relative z-10 fade-in">
+                Ready to Transform Your<br>
+                <span class="text-gradient">Business Asset?</span>
+            </h2>
+            <p class="text-xl text-cream/60 mb-12 max-w-2xl mx-auto relative z-10 fade-in stagger-1">
+                Whether you're looking to optimize operations, prepare for sale, or explore acquisition opportunities, we should talk.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 fade-in stagger-2">
+                <button onclick="openModal()" class="magnetic-btn px-10 py-5 rounded-full bg-burgundy text-cream font-semibold text-lg hover:shadow-lg hover:shadow-burgundy/20 transition-all duration-300 flex items-center space-x-2 group">
+                    <span>Schedule Consultation</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mt-12 flex items-center justify-center space-x-8 text-cream/40 text-sm relative z-10 fade-in stagger-3">
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Confidential
+                </span>
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    No Obligation
+                </span>
+                <span class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-burgundy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Strategic Insights
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cream/10 bg-charcoal-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="relative w-10 h-10 flex items-center justify-center">
+                            <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                                <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                                <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-display font-bold text-cream">
+                            Caribbean<span class="text-burgundy">Biz</span>
+                        </span>
+                    </div>
+                    <p class="text-cream/50 max-w-sm mb-6">
+                        Transforming Caribbean businesses into structured, scalable, and sellable assets through strategic optimization and technological innovation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-cream/60 hover:text-burgundy hover:border-burgundy/50 transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-cream/60 hover:text-burgundy hover:border-burgundy/50 transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-cream mb-4">Services</h4>
+                    <ul class="space-y-3 text-cream/50">
+                        <li><a href="#services" class="hover:text-burgundy transition-colors">Strategic Audit</a></li>
+                        <li><a href="#services" class="hover:text-burgundy transition-colors">Digital Organization</a></li>
+                        <li><a href="#services" class="hover:text-burgundy transition-colors">Automation</a></li>
+                        <li><a href="#services" class="hover:text-burgundy transition-colors">Data Analytics</a></li>
+                        <li><a href="#services" class="hover:text-burgundy transition-colors">Exit Strategy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-cream mb-4">Company</h4>
+                    <ul class="space-y-3 text-cream/50">
+                        <li><a href="#about" class="hover:text-burgundy transition-colors">About Us</a></li>
+                        <li><a href="#acquisition" class="hover:text-burgundy transition-colors">Acquisition Criteria</a></li>
+                        <li><a href="#" class="hover:text-burgundy transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-burgundy transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-burgundy transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-cream/40 text-sm mb-4 md:mb-0">
+                    © 2026 CaribbeanBiz. All rights reserved. Santo Domingo, Dominican Republic.
+                </p>
+                <div class="flex space-x-6 text-sm text-cream/40">
+                    <a href="#" class="hover:text-burgundy transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-burgundy transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass-panel rounded-3xl p-8 max-w-lg w-full relative transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-cream/60 hover:text-cream transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <div class="text-center mb-8">
+                    <!-- Logo in Modal -->
+                    <div class="w-16 h-16 mx-auto mb-4 relative">
+                        <svg viewBox="0 0 100 100" class="w-full h-full" fill="none">
+                            <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023"/>
+                            <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-cream mb-2">Start Your Transformation</h3>
+                    <p class="text-cream/60">Book your complimentary strategic audit</p>
+                </div>
+
+                <form onsubmit="handleSubmit(event)" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-cream/80 mb-1">First Name</label>
+                            <input type="text" required class="w-full bg-charcoal/50 border border-cream/20 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-burgundy transition-colors" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-cream/80 mb-1">Last Name</label>
+                            <input type="text" required class="w-full bg-charcoal/50 border border-cream/20 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-burgundy transition-colors" placeholder="Doe">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-cream/80 mb-1">Email</label>
+                        <input type="email" required class="w-full bg-charcoal/50 border border-cream/20 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-burgundy transition-colors" placeholder="john@company.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-cream/80 mb-1">Company</label>
+                        <input type="text" class="w-full bg-charcoal/50 border border-cream/20 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-burgundy transition-colors" placeholder="Company Name">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-cream/80 mb-1">Interest</label>
+                        <select class="w-full bg-charcoal/50 border border-cream/20 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-burgundy transition-colors">
+                            <option value="">Select an option...</option>
+                            <option value="audit">Business Audit</option>
+                            <option value="optimization">Operational Optimization</option>
+                            <option value="acquisition">Business Acquisition</option>
+                            <option value="exit">Exit Strategy</option>
+                            <option value="partnership">Investment Partnership</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-cream/80 mb-1">Message</label>
+                        <textarea rows="3" class="w-full bg-charcoal/50 border border-cream/20 rounded-lg px-4 py-3 text-cream focus:outline-none focus:border-burgundy transition-colors" placeholder="Tell us about your business..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-lg bg-burgundy text-cream font-semibold hover:bg-burgundy-light transition-colors flex items-center justify-center space-x-2">
+                        <span id="submit-text">Request Consultation</span>
+                        <svg id="submit-spinner" class="animate-spin h-5 w-5 text-cream hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Performance-optimized JavaScript
+
+        // Intersection Observer for fade-in animations (replaces heavy GSAP ScrollTrigger)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Unobserve after animation to save resources
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation using Intersection Observer
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    animateCounter(counter, target);
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter-value').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        function animateCounter(element, target) {
+            const duration = 2000;
+            const start = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(easeOutQuart * target);
+
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = target;
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Navigation visibility on scroll - throttled
+        const navbar = document.getElementById('navbar');
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const currentScroll = window.pageYOffset;
+
+                    if (currentScroll > 100) {
+                        navbar.classList.remove('opacity-0', '-translate-y-full');
+                        navbar.classList.add('opacity-100', 'translate-y-0');
+                    } else {
+                        navbar.classList.add('opacity-0', '-translate-y-full');
+                        navbar.classList.remove('opacity-100', 'translate-y-0');
+                    }
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Modal functions
+        function openModal() {
+            const modal = document.getElementById('contact-modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            // Force reflow
+            void modal.offsetWidth;
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('contact-modal');
+            const content = document.getElementById('modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const submitText = document.getElementById('submit-text');
+            const spinner = document.getElementById('submit-spinner');
+
+            submitText.textContent = 'Sending...';
+            spinner.classList.remove('hidden');
+
+            setTimeout(() => {
+                submitText.textContent = 'Request Sent!';
+                spinner.classList.add('hidden');
+                setTimeout(() => {
+                    closeModal();
+                    submitText.textContent = 'Request Consultation';
+                }, 1500);
+            }, 2000);
+        }
+
+        // Smooth scroll
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Preload critical resources
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                // Load non-critical resources here if needed
+            });
+        }
+    </script>
+</body>
+</html>
