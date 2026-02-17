@@ -1,4 +1,3 @@
-import LogoSVG from './ui/LogoSVG'
 
 const SERVICE_LINKS = [
   'Strategic Audit',
@@ -23,13 +22,12 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <LogoSVG />
-              </div>
-              <span className="text-2xl font-display font-bold text-cream">
-                Caribbean<span className="text-burgundy">Biz</span>
-              </span>
+            <div className="mb-6">
+              <img
+                src="/assets/CaribbeanBiz%20Logo-02.png"
+                alt="CaribbeanBiz"
+                className="h-10 w-auto"
+              />
             </div>
             <p className="text-cream/50 max-w-sm mb-6">
               Transforming Caribbean businesses into structured, scalable, and sellable assets

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavbarScroll } from '../hooks/useNavbarScroll'
-import LogoSVG from './ui/LogoSVG'
 
 const NAV_LINKS = [
   { label: 'About',       href: 'about'      },
@@ -31,13 +30,12 @@ export default function Navbar({ onOpenModal }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
-              <a href="#" className="logo-container flex items-center space-x-3 group">
-                <div className="relative w-10 h-10 flex items-center justify-center">
-                  <LogoSVG className="w-full h-full logo-icon" />
-                </div>
-                <span className="text-2xl font-display font-bold tracking-tight text-cream group-hover:text-burgundy transition-colors">
-                  Caribbean<span className="text-burgundy group-hover:text-cream">Biz</span>
-                </span>
+              <a href="#" className="logo-container group">
+                <img
+                  src="/assets/CaribbeanBiz%20Logo-02.png"
+                  alt="CaribbeanBiz"
+                  className="h-10 w-auto logo-icon"
+                />
               </a>
 
               {/* Desktop Nav */}

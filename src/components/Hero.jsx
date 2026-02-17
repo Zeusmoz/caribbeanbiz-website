@@ -14,10 +14,12 @@ export default function Hero({ onOpenModal }) {
     >
       {/* Animated Logo Watermark */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full animate-float" fill="none">
-          <path d="M20 80 L50 50 L20 20 L35 20 L65 50 L35 80 Z" fill="#8B0023" />
-          <path d="M50 80 L80 50 L50 20 L65 20 L95 50 L65 80 Z" fill="#8B0023" />
-        </svg>
+        <img
+          src="/assets/CaribbeanBiz%20Logo-03.png"
+          alt=""
+          className="w-full h-full animate-float"
+          style={{ objectFit: 'contain' }}
+        />
       </div>
 
       {/* Decorative diamond */}
