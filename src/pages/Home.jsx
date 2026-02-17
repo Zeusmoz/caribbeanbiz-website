@@ -10,6 +10,7 @@ import WhyCaribbeanBiz from '../components/WhyCaribbeanBiz'
 import CTABanner from '../components/CTABanner'
 import Footer from '../components/Footer'
 import ContactModal from '../components/ContactModal'
+import WhatsAppButton from '../components/WhatsAppButton'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -33,6 +34,7 @@ export default function Home() {
       </main>
       <Footer />
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
+      <WhatsAppButton />
     </>
   )
 }
