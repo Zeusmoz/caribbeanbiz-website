@@ -38,9 +38,6 @@ export default function Methodology() {
         </div>
 
         <div className="relative">
-          {/* Horizontal connector line (desktop only) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-burgundy/30 to-transparent transform -translate-y-1/2" />
-
           {/* Row 1: Steps 01-04 with arrows between */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-0 lg:gap-0">
             <div className="lg:col-span-1 p-4">

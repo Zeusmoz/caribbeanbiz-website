@@ -30,11 +30,12 @@ export default function Navbar({ onOpenModal }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
-              <a href="#" className="logo-container group">
+              <a href="#" className="logo-container group flex items-center overflow-hidden" style={{ height: '48px' }}>
                 <img
                   src="/assets/CaribbeanBiz%20Logo-02.png"
                   alt="CaribbeanBiz"
-                  className="h-10 w-auto logo-icon"
+                  className="logo-icon"
+                  style={{ height: '200px', width: 'auto', flexShrink: 0 }}
                 />
               </a>
 

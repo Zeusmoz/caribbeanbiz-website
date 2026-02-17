@@ -22,11 +22,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-2">
-            <div className="mb-6">
+            <div className="mb-6 flex items-center overflow-hidden" style={{ height: '48px' }}>
               <img
                 src="/assets/CaribbeanBiz%20Logo-02.png"
                 alt="CaribbeanBiz"
-                className="h-10 w-auto"
+                style={{ height: '200px', width: 'auto', flexShrink: 0 }}
               />
             </div>
             <p className="text-cream/50 max-w-sm mb-6">

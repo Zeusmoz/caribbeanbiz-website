@@ -20,7 +20,7 @@ const INITIAL_FORM = {
 
 export default function ContactModal({ isOpen, onClose }) {
   const [isAnimated, setIsAnimated] = useState(false)
-  const [submitState, setSubmitState] = useState('idle') // 'idle' | 'loading' | 'success'
+  const [submitState, setSubmitState] = useState('idle') // 'idle' | 'loading' | 'success' | 'error'
   const [formData, setFormData] = useState(INITIAL_FORM)
 
   // Trigger enter animation after mount
@@ -45,18 +45,29 @@ export default function ContactModal({ isOpen, onClose }) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault()
     setSubmitState('loading')
-    setTimeout(() => {
-      setSubmitState('success')
-      setTimeout(() => {
-        onClose()
-        setSubmitState('idle')
-        setFormData(INITIAL_FORM)
-      }, 1500)
-    }, 2000)
-  }, [onClose])
+    try {
+      const res = await fetch('https://formspree.io/f/xqedbvvk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        setSubmitState('success')
+        setTimeout(() => {
+          onClose()
+          setSubmitState('idle')
+          setFormData(INITIAL_FORM)
+        }, 1500)
+      } else {
+        setSubmitState('error')
+      }
+    } catch {
+      setSubmitState('error')
+    }
+  }, [formData, onClose])
 
   if (!isOpen) return null
 
@@ -188,6 +199,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 {submitState === 'idle'    && 'Request Consultation'}
                 {submitState === 'loading' && 'Sending...'}
                 {submitState === 'success' && 'Request Sent!'}
+                {submitState === 'error'   && 'Something went wrong — try again'}
               </span>
               {submitState === 'loading' && (
                 <svg className="animate-spin h-5 w-5 text-cream" fill="none" viewBox="0 0 24 24">

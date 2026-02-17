@@ -1,6 +1,4 @@
 import LogoSVG from './ui/LogoSVG'
-import StatCounter from './StatCounter'
-import { STATS } from '../data/stats'
 
 export default function Hero({ onOpenModal }) {
   const scrollToAbout = () => {
@@ -67,20 +65,9 @@ export default function Hero({ onOpenModal }) {
           </button>
         </div>
 
-        {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto fade-in visible stagger-4">
-          {STATS.map((stat) => (
-            <StatCounter key={stat.label} target={stat.target} suffix={stat.suffix} label={stat.label} />
-          ))}
-        </div>
+
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 fade-in visible stagger-5">
-        <div className="w-6 h-10 rounded-full border-2 border-cream/30 flex justify-center pt-2">
-          <div className="w-1 h-2 bg-burgundy rounded-full animate-bounce"></div>
-        </div>
-      </div>
     </section>
   )
 }
