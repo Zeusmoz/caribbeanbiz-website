@@ -1,39 +1,9 @@
 import { useFadeIn } from '../hooks/useFadeIn'
 import LogoSVG from './ui/LogoSVG'
-
-const STEPS = [
-  {
-    num: '1',
-    title: 'Strategic Acquisition',
-    desc: 'We identify businesses with $1M-$10M revenue, strong market position, but operational challenges.',
-  },
-  {
-    num: '2',
-    title: 'Intensive Optimization',
-    desc: '6-18 month transformation period implementing systems, automation, and operational excellence.',
-  },
-  {
-    num: '3',
-    title: 'Value Realization',
-    desc: 'Strategic exit through sale to private equity, strategic buyers, or IPO preparation.',
-  },
-]
-
-const CRITERIA = [
-  { label: 'Revenue Range', value: '$1M - $10M' },
-  { label: 'EBITDA Margin', value: '10% - 25%' },
-  { label: 'Business Age',  value: '5+ Years' },
-  { label: 'Industries',    value: 'Diverse' },
-  { label: 'Location',      value: 'Caribbean Region' },
-]
-
-const METRICS = [
-  { value: '24-36', label: 'Month Timeline' },
-  { value: '3-5x',  label: 'Value Multiple' },
-  { value: '85%',   label: 'Success Rate' },
-]
+import { useTranslation } from '../contexts/LanguageContext'
 
 export default function Acquisition({ onOpenModal }) {
+  const { t } = useTranslation()
   const leftRef = useFadeIn()
   const rightRef = useFadeIn()
 
@@ -46,22 +16,21 @@ export default function Acquisition({ onOpenModal }) {
           {/* Left Column */}
           <div ref={leftRef} className="fade-in">
             <div className="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase mb-6">
-              Acquisition Model
+              {t.acquisition.label}
             </div>
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 leading-tight">
-              We Buy, Optimize &<br />
-              <span className="text-gradient">Scale Businesses</span>
+              {t.acquisition.heading1}<br />
+              <span className="text-gradient">{t.acquisition.heading2}</span>
             </h2>
             <p className="text-lg text-cream/60 mb-8 leading-relaxed">
-              CaribbeanBiz actively acquires small to medium enterprises with strong fundamentals
-              but operational inefficiencies. We transform them into high-performing assets.
+              {t.acquisition.p}
             </p>
 
             <div className="space-y-6">
-              {STEPS.map((step) => (
-                <div key={step.num} className="flex items-start space-x-4">
+              {t.acquisition.steps.map((step, idx) => (
+                <div key={idx} className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-full bg-burgundy/20 flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-burgundy font-bold">{step.num}</span>
+                    <span className="text-burgundy font-bold">{idx + 1}</span>
                   </div>
                   <div>
                     <h4 className="text-lg font-bold text-cream mb-1">{step.title}</h4>
@@ -72,13 +41,13 @@ export default function Acquisition({ onOpenModal }) {
             </div>
 
             <div className="mt-10 flex items-center space-x-6">
-              {METRICS.map((metric, idx) => (
+              {t.acquisition.metrics.map((metric, idx) => (
                 <div key={metric.label} className="flex items-center space-x-6">
                   <div className="text-center">
                     <div className="text-3xl font-display font-bold text-burgundy">{metric.value}</div>
                     <div className="text-sm text-cream/50">{metric.label}</div>
                   </div>
-                  {idx < METRICS.length - 1 && (
+                  {idx < t.acquisition.metrics.length - 1 && (
                     <div className="h-12 w-px bg-cream/20"></div>
                   )}
                 </div>
@@ -95,10 +64,10 @@ export default function Acquisition({ onOpenModal }) {
                 <LogoSVG secondOpacity="1" />
               </div>
 
-              <h3 className="text-2xl font-display font-bold text-cream mb-6">Investment Criteria</h3>
+              <h3 className="text-2xl font-display font-bold text-cream mb-6">{t.acquisition.criteriaTitle}</h3>
 
               <div className="space-y-4">
-                {CRITERIA.map((row) => (
+                {t.acquisition.criteria.map((row) => (
                   <div
                     key={row.label}
                     className="flex items-center justify-between p-4 rounded-xl bg-charcoal/50 border border-cream/10"
@@ -113,7 +82,7 @@ export default function Acquisition({ onOpenModal }) {
                 onClick={onOpenModal}
                 className="w-full mt-6 py-4 rounded-xl bg-burgundy text-cream font-semibold hover:bg-burgundy-light transition-colors"
               >
-                Submit Business for Review
+                {t.acquisition.submitBtn}
               </button>
             </div>
           </div>

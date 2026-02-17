@@ -1,21 +1,19 @@
 import { useState } from 'react'
 import { useNavbarScroll } from '../hooks/useNavbarScroll'
-
-const NAV_LINKS = [
-  { label: 'About',       href: 'about'      },
-  { label: 'Challenges',  href: 'problem'    },
-  { label: 'Methodology', href: 'solution'   },
-  { label: 'Services',    href: 'services'   },
-  { label: 'Acquisition', href: 'acquisition' },
-]
-
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-}
+import { useTranslation } from '../contexts/LanguageContext'
 
 export default function Navbar({ onOpenModal }) {
   const isVisible = useNavbarScroll(100)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const { t, lang, toggle } = useTranslation()
+
+  const NAV_LINKS = [
+    { label: t.nav.about,       href: 'about'       },
+    { label: t.nav.challenges,  href: 'problem'     },
+    { label: t.nav.methodology, href: 'solution'    },
+    { label: t.nav.services,    href: 'services'    },
+    { label: t.nav.acquisition, href: 'acquisition' },
+  ]
 
   const closeMobile = () => setIsMobileOpen(false)
 
@@ -50,11 +48,21 @@ export default function Navbar({ onOpenModal }) {
                     {link.label}
                   </a>
                 ))}
+
+                {/* Language Toggle */}
+                <button
+                  onClick={toggle}
+                  className="px-3 py-1.5 rounded-full border border-cream/20 text-cream/70 hover:border-burgundy hover:text-burgundy transition-all text-sm font-semibold"
+                  aria-label="Toggle language"
+                >
+                  {lang === 'en' ? 'ES' : 'EN'}
+                </button>
+
                 <button
                   onClick={onOpenModal}
                   className="magnetic-btn px-6 py-2.5 rounded-full border border-burgundy text-burgundy hover:bg-burgundy hover:text-cream transition-all duration-300"
                 >
-                  <span className="text-sm font-semibold">Book Audit</span>
+                  <span className="text-sm font-semibold">{t.nav.bookAudit}</span>
                 </button>
               </div>
 
@@ -98,10 +106,17 @@ export default function Navbar({ onOpenModal }) {
           ))}
 
           <button
+            onClick={toggle}
+            className="px-6 py-2 rounded-full border border-cream/30 text-cream font-semibold text-lg"
+          >
+            {lang === 'en' ? 'Español' : 'English'}
+          </button>
+
+          <button
             onClick={() => { onOpenModal(); closeMobile() }}
             className="px-8 py-3 rounded-full bg-burgundy text-cream font-semibold"
           >
-            Book Strategic Audit
+            {t.nav.bookStrategicAudit}
           </button>
         </div>
       )}

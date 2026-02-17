@@ -1,25 +1,9 @@
 import { useFadeIn } from '../hooks/useFadeIn'
 import LogoSVG from './ui/LogoSVG'
-
-const STEPS = [
-  {
-    num: '01',
-    title: 'Strategic Acquisition',
-    desc: 'We identify undervalued businesses with high optimization potential in the Caribbean region.',
-  },
-  {
-    num: '02',
-    title: 'Digital Transformation',
-    desc: 'Implementing automation, data systems, and modern operational frameworks.',
-  },
-  {
-    num: '03',
-    title: 'Value Acceleration',
-    desc: 'Structuring for maximum valuation and strategic exit opportunities.',
-  },
-]
+import { useTranslation } from '../contexts/LanguageContext'
 
 export default function About() {
+  const { t } = useTranslation()
   const labelRef = useFadeIn()
   const h2Ref = useFadeIn()
   const p1Ref = useFadeIn()
@@ -34,19 +18,16 @@ export default function About() {
           {/* Left Column */}
           <div className="space-y-8">
             <div ref={labelRef} className="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase fade-in">
-              Our Mission
+              {t.about.label}
             </div>
             <h2 ref={h2Ref} className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight fade-in stagger-1">
-              Transforming traditional Caribbean businesses into{' '}
-              <span className="text-gradient">structured, scalable, and sellable assets.</span>
+              <span className="text-gradient">{t.about.heading}</span>
             </h2>
             <p ref={p1Ref} className="text-lg text-cream/60 leading-relaxed fade-in stagger-2">
-              CaribbeanBiz operates at the intersection of strategic consulting, technology implementation,
-              and private investment. We don't just advise—we execute, optimize, and transform.
+              {t.about.p1}
             </p>
             <p ref={p2Ref} className="text-lg text-cream/60 leading-relaxed fade-in stagger-3">
-              Based in the Dominican Republic, we understand the unique challenges and opportunities
-              of Caribbean markets. Our approach combines global best practices with local market expertise.
+              {t.about.p2}
             </p>
 
             <div ref={badgeRef} className="flex items-center space-x-4 pt-4 fade-in stagger-4">
@@ -56,8 +37,8 @@ export default function About() {
                 </svg>
               </div>
               <div>
-                <div className="font-semibold text-cream">Execution-First Approach</div>
-                <div className="text-sm text-cream/50">Results over presentations</div>
+                <div className="font-semibold text-cream">{t.about.badgeTitle}</div>
+                <div className="text-sm text-cream/50">{t.about.badgeSub}</div>
               </div>
             </div>
           </div>
@@ -70,7 +51,7 @@ export default function About() {
                 <LogoSVG />
               </div>
 
-              {STEPS.map((step, idx) => (
+              {t.about.steps.map((step, idx) => (
                 <div key={step.num}>
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 rounded-xl bg-burgundy/20 flex items-center justify-center flex-shrink-0">
@@ -81,7 +62,7 @@ export default function About() {
                       <p className="text-cream/60">{step.desc}</p>
                     </div>
                   </div>
-                  {idx < STEPS.length - 1 && (
+                  {idx < t.about.steps.length - 1 && (
                     <div className="h-px bg-gradient-to-r from-transparent via-cream/20 to-transparent mt-6"></div>
                   )}
                 </div>

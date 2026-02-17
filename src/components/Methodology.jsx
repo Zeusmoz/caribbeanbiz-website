@@ -1,6 +1,7 @@
 import { useFadeIn } from '../hooks/useFadeIn'
 import MethodologyStep from './MethodologyStep'
 import { METHODOLOGY_STEPS } from '../data/methodology'
+import { useTranslation } from '../contexts/LanguageContext'
 
 function ArrowRight() {
   return (
@@ -13,12 +14,19 @@ function ArrowRight() {
 }
 
 export default function Methodology() {
+  const { t } = useTranslation()
   const labelRef = useFadeIn()
   const h2Ref = useFadeIn()
   const pRef = useFadeIn()
 
-  const row1 = METHODOLOGY_STEPS.slice(0, 4)
-  const row2 = METHODOLOGY_STEPS.slice(4)
+  const stepsWithTranslations = METHODOLOGY_STEPS.map((step, idx) => ({
+    ...step,
+    title: t.methodology.steps[idx].title,
+    description: t.methodology.steps[idx].description,
+  }))
+
+  const row1 = stepsWithTranslations.slice(0, 4)
+  const row2 = stepsWithTranslations.slice(4)
 
   return (
     <section id="solution" className="py-32 relative overflow-hidden">
@@ -27,13 +35,13 @@ export default function Methodology() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
           <div ref={labelRef} className="inline-block px-4 py-2 rounded-full glass-panel text-burgundy text-sm font-semibold tracking-wider uppercase mb-6 fade-in">
-            Our Methodology
+            {t.methodology.label}
           </div>
           <h2 ref={h2Ref} className="text-4xl md:text-5xl font-display font-bold mb-6 fade-in stagger-1">
-            The CaribbeanBiz <span className="text-gradient">Optimization Cycle</span>
+            {t.methodology.heading1} <span className="text-gradient">{t.methodology.heading2}</span>
           </h2>
           <p ref={pRef} className="text-xl text-cream/60 max-w-3xl mx-auto fade-in stagger-2">
-            A systematic approach to transforming traditional businesses into high-value, automated assets
+            {t.methodology.subtitle}
           </p>
         </div>
 

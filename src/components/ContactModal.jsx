@@ -1,13 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import LogoSVG from './ui/LogoSVG'
-
-const INTEREST_OPTIONS = [
-  { value: 'audit',        label: 'Business Audit' },
-  { value: 'optimization', label: 'Operational Optimization' },
-  { value: 'acquisition',  label: 'Business Acquisition' },
-  { value: 'exit',         label: 'Exit Strategy' },
-  { value: 'partnership',  label: 'Investment Partnership' },
-]
+import { useTranslation } from '../contexts/LanguageContext'
 
 const INITIAL_FORM = {
   firstName: '',
@@ -19,6 +12,7 @@ const INITIAL_FORM = {
 }
 
 export default function ContactModal({ isOpen, onClose }) {
+  const { t: tr } = useTranslation()
   const [isAnimated, setIsAnimated] = useState(false)
   const [submitState, setSubmitState] = useState('idle') // 'idle' | 'loading' | 'success' | 'error'
   const [formData, setFormData] = useState(INITIAL_FORM)
@@ -105,15 +99,15 @@ export default function ContactModal({ isOpen, onClose }) {
             <div className="w-16 h-16 mx-auto mb-4 relative">
               <LogoSVG />
             </div>
-            <h3 className="text-2xl font-display font-bold text-cream mb-2">Start Your Transformation</h3>
-            <p className="text-cream/60">Book your complimentary strategic audit</p>
+            <h3 className="text-2xl font-display font-bold text-cream mb-2">{tr.modal.title}</h3>
+            <p className="text-cream/60">{tr.modal.subtitle}</p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className={labelClass}>First Name</label>
+                <label className={labelClass}>{tr.modal.firstName}</label>
                 <input
                   type="text"
                   name="firstName"
@@ -125,7 +119,7 @@ export default function ContactModal({ isOpen, onClose }) {
                 />
               </div>
               <div>
-                <label className={labelClass}>Last Name</label>
+                <label className={labelClass}>{tr.modal.lastName}</label>
                 <input
                   type="text"
                   name="lastName"
@@ -139,7 +133,7 @@ export default function ContactModal({ isOpen, onClose }) {
             </div>
 
             <div>
-              <label className={labelClass}>Email</label>
+              <label className={labelClass}>{tr.modal.email}</label>
               <input
                 type="email"
                 name="email"
@@ -152,7 +146,7 @@ export default function ContactModal({ isOpen, onClose }) {
             </div>
 
             <div>
-              <label className={labelClass}>Company</label>
+              <label className={labelClass}>{tr.modal.company}</label>
               <input
                 type="text"
                 name="company"
@@ -164,29 +158,29 @@ export default function ContactModal({ isOpen, onClose }) {
             </div>
 
             <div>
-              <label className={labelClass}>Interest</label>
+              <label className={labelClass}>{tr.modal.interest}</label>
               <select
                 name="interest"
                 value={formData.interest}
                 onChange={handleChange}
                 className={inputClass}
               >
-                <option value="">Select an option...</option>
-                {INTEREST_OPTIONS.map((opt) => (
+                <option value="">{tr.modal.selectOption}</option>
+                {tr.modal.interests.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className={labelClass}>Message</label>
+              <label className={labelClass}>{tr.modal.message}</label>
               <textarea
                 name="message"
                 rows={3}
                 value={formData.message}
                 onChange={handleChange}
                 className={inputClass}
-                placeholder="Tell us about your business..."
+                placeholder={tr.modal.messagePlaceholder}
               />
             </div>
 
@@ -196,10 +190,10 @@ export default function ContactModal({ isOpen, onClose }) {
               className="w-full py-4 rounded-lg bg-burgundy text-cream font-semibold hover:bg-burgundy-light transition-colors flex items-center justify-center space-x-2 disabled:opacity-80"
             >
               <span>
-                {submitState === 'idle'    && 'Request Consultation'}
-                {submitState === 'loading' && 'Sending...'}
-                {submitState === 'success' && 'Request Sent!'}
-                {submitState === 'error'   && 'Something went wrong — try again'}
+                {submitState === 'idle'    && tr.modal.submit}
+                {submitState === 'loading' && tr.modal.sending}
+                {submitState === 'success' && tr.modal.success}
+                {submitState === 'error'   && tr.modal.error}
               </span>
               {submitState === 'loading' && (
                 <svg className="animate-spin h-5 w-5 text-cream" fill="none" viewBox="0 0 24 24">

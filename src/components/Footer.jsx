@@ -1,21 +1,11 @@
 
-const SERVICE_LINKS = [
-  'Strategic Audit',
-  'Digital Organization',
-  'Automation',
-  'Data Analytics',
-  'Exit Strategy',
-]
+import { useTranslation } from '../contexts/LanguageContext'
 
-const COMPANY_LINKS = [
-  { label: 'About Us',            href: '#about'       },
-  { label: 'Acquisition Criteria', href: '#acquisition' },
-  { label: 'Case Studies',        href: '#'            },
-  { label: 'Careers',             href: '#'            },
-  { label: 'Contact',             href: '#'            },
-]
+const COMPANY_HREFS = ['#about', '#acquisition', '#', '#', '#']
 
 export default function Footer() {
+  const { t } = useTranslation()
+
   return (
     <footer className="border-t border-cream/10 bg-charcoal-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -30,8 +20,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-cream/50 max-w-sm mb-6">
-              Transforming Caribbean businesses into structured, scalable, and sellable assets
-              through strategic optimization and technological innovation.
+              {t.about.heading}
             </p>
             <div className="flex space-x-4">
               {/* Twitter */}
@@ -59,9 +48,9 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-cream mb-4">Services</h4>
+            <h4 className="font-bold text-cream mb-4">{t.footer.servicesTitle}</h4>
             <ul className="space-y-3 text-cream/50">
-              {SERVICE_LINKS.map((link) => (
+              {t.footer.serviceLinks.map((link) => (
                 <li key={link}>
                   <a href="#services" className="hover:text-burgundy transition-colors">{link}</a>
                 </li>
@@ -71,11 +60,11 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-bold text-cream mb-4">Company</h4>
+            <h4 className="font-bold text-cream mb-4">{t.footer.companyTitle}</h4>
             <ul className="space-y-3 text-cream/50">
-              {COMPANY_LINKS.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="hover:text-burgundy transition-colors">{link.label}</a>
+              {t.footer.companyLinks.map((label, idx) => (
+                <li key={label}>
+                  <a href={COMPANY_HREFS[idx]} className="hover:text-burgundy transition-colors">{label}</a>
                 </li>
               ))}
             </ul>
@@ -84,11 +73,11 @@ export default function Footer() {
 
         <div className="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-cream/40 text-sm mb-4 md:mb-0">
-            © 2026 CaribbeanBiz. All rights reserved. Santo Domingo, Dominican Republic.
+            {t.footer.copyright}
           </p>
           <div className="flex space-x-6 text-sm text-cream/40">
-            <a href="#" className="hover:text-burgundy transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-burgundy transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-burgundy transition-colors">{t.footer.privacy}</a>
+            <a href="#" className="hover:text-burgundy transition-colors">{t.footer.terms}</a>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import { useFadeIn } from '../hooks/useFadeIn'
 import { DIFFERENTIATORS } from '../data/differentiators'
+import { useTranslation } from '../contexts/LanguageContext'
 
 export default function WhyCaribbeanBiz() {
+  const { t } = useTranslation()
   const h2Ref = useFadeIn()
 
   return (
@@ -9,13 +11,20 @@ export default function WhyCaribbeanBiz() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <h2 ref={h2Ref} className="text-4xl md:text-5xl font-display font-bold mb-6 fade-in">
-            Why <span className="text-gradient">CaribbeanBiz</span>?
+            {t.why.heading.split('CaribbeanBiz')[0]}
+            <span className="text-gradient">CaribbeanBiz</span>
+            {t.why.heading.split('CaribbeanBiz')[1]}
           </h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {DIFFERENTIATORS.map((item) => (
-            <DifferentiatorCard key={item.id} item={item} />
+          {DIFFERENTIATORS.map((item, idx) => (
+            <DifferentiatorCard
+              key={item.id}
+              item={item}
+              title={t.why.items[idx].title}
+              description={t.why.items[idx].description}
+            />
           ))}
         </div>
       </div>
@@ -23,7 +32,7 @@ export default function WhyCaribbeanBiz() {
   )
 }
 
-function DifferentiatorCard({ item }) {
+function DifferentiatorCard({ item, title, description }) {
   const ref = useFadeIn()
 
   return (
@@ -37,8 +46,8 @@ function DifferentiatorCard({ item }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={item.strokeWidth || 1.5} d={item.iconPath} />
         </svg>
       </div>
-      <h3 className="text-xl font-bold text-cream mb-2">{item.title}</h3>
-      <p className="text-cream/60 text-sm">{item.description}</p>
+      <h3 className="text-xl font-bold text-cream mb-2">{title}</h3>
+      <p className="text-cream/60 text-sm">{description}</p>
     </div>
   )
 }

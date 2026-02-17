@@ -1,6 +1,8 @@
 import LogoSVG from './ui/LogoSVG'
+import { useTranslation } from '../contexts/LanguageContext'
 
 export default function Hero({ onOpenModal }) {
+  const { t } = useTranslation()
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -33,18 +35,17 @@ export default function Hero({ onOpenModal }) {
           <div className="w-6 h-6 relative">
             <LogoSVG />
           </div>
-          <span className="text-sm font-medium text-cream/80 tracking-wider uppercase">Dominican Republic Based</span>
+          <span className="text-sm font-medium text-cream/80 tracking-wider uppercase">{t.hero.badge}</span>
         </div>
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-[0.9] tracking-tight fade-in visible stagger-1">
-          Transforming<br />
-          <span className="text-gradient-gold">Caribbean</span><br />
-          <span className="text-burgundy">Business Assets</span>
+          {t.hero.line1}<br />
+          <span className="text-gradient-gold">{t.hero.line2}</span><br />
+          <span className="text-burgundy">{t.hero.line3}</span>
         </h1>
 
         <p className="text-lg md:text-xl text-cream/60 max-w-2xl mx-auto mb-12 font-light leading-relaxed fade-in visible stagger-2">
-          We acquire, optimize, and structure traditional businesses into scalable,
-          automated, and highly valuable enterprises ready for strategic exits.
+          {t.hero.subtitle}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in visible stagger-3">
@@ -52,7 +53,7 @@ export default function Hero({ onOpenModal }) {
             onClick={onOpenModal}
             className="magnetic-btn group px-8 py-4 rounded-full bg-burgundy text-cream font-semibold text-lg hover:shadow-lg hover:shadow-burgundy/20 transition-all duration-300 flex items-center space-x-2"
           >
-            <span>Book Strategic Audit</span>
+            <span>{t.hero.cta1}</span>
             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -61,13 +62,10 @@ export default function Hero({ onOpenModal }) {
             onClick={scrollToAbout}
             className="magnetic-btn px-8 py-4 rounded-full border border-cream/30 text-cream font-semibold text-lg hover:bg-cream/10 transition-all duration-300"
           >
-            <span>Partner With Us</span>
+            <span>{t.hero.cta2}</span>
           </button>
         </div>
-
-
       </div>
-
     </section>
   )
 }
