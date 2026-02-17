@@ -8,8 +8,9 @@ const LanguageContext = createContext(null)
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(() => {
-    const browser = navigator.language?.slice(0, 2)
-    return browser === 'es' ? 'es' : 'en'
+    const languages = navigator.languages?.length ? navigator.languages : [navigator.language]
+    const isSpanish = languages.some((l) => l?.toLowerCase().startsWith('es'))
+    return isSpanish ? 'es' : 'en'
   })
 
   const t = TRANSLATIONS[lang]

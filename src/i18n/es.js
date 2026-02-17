@@ -5,7 +5,7 @@ export default {
     bookAudit: 'Reservar Auditoría', bookStrategicAudit: 'Reservar Auditoría Estratégica',
   },
   hero: {
-    badge: 'Con sede en República Dominicana',
+    badge: 'República Dominicana',
     line1: 'Transformando', line2: 'Activos de', line3: 'Negocios Caribeños',
     subtitle: 'Adquirimos, optimizamos y estructuramos negocios tradicionales en empresas escalables, automatizadas y de alto valor listas para salidas estratégicas.',
     cta1: 'Reservar Auditoría Estratégica', cta2: 'Ser Nuestro Socio',
