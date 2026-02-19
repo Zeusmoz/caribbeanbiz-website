@@ -25,31 +25,15 @@ const PAIN_OPTIONS = ["Cash flow","Project visibility","Owner dependency","Margi
 const REVENUE_OPTIONS = ["RD$10-50M","RD$50-100M","RD$100M+"];
 const SOURCE_OPTIONS = ["Referral","LinkedIn","Event","Cold","Partner"];
 const PROB_OPTIONS = ["10%","25%","50%","75%","90%"];
-const DB_ID = "18850a8a-a8cd-48fe-b362-0f0ab3d9bbd1";
 
-async function notionCall(prompt) {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
+async function apiFetch(method, body) {
+  const res = await fetch("/api/prospects", {
+    method,
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }],
-      mcp_servers: [{ type: "url", url: "https://mcp.notion.com/mcp", name: "notion" }]
-    })
+    body: body ? JSON.stringify(body) : undefined,
   });
+  if (!res.ok) throw new Error(await res.text());
   return res.json();
-}
-
-function extractJSON(data) {
-  if (!data?.content) return null;
-  const text = data.content.filter(b => b.type === "text").map(b => b.text).join("\n");
-  try {
-    const clean = text.replace(/```json\n?|```\n?/g, "").trim();
-    const s = clean.indexOf("["), e = clean.lastIndexOf("]");
-    if (s !== -1 && e !== -1) return JSON.parse(clean.slice(s, e + 1));
-  } catch {}
-  return null;
 }
 
 const inputStyle = {
@@ -116,16 +100,8 @@ export default function Pipeline() {
   async function fetchAll() {
     setLoading(true);
     try {
-      const data = await notionCall(
-        `Query the Notion Prospects database (collection data source ID: ${DB_ID}). ` +
-        `Return ALL records as a raw JSON array with no explanation, no markdown. ` +
-        `Each object must have: url, Name, Company, Status, PainPoint (array), RevenueRange, ` +
-        `Source, Notes, NextAction, NextActionDate, LastContact, EstimatedValue, Probability, Email, Contact. ` +
-        `Use null for missing values. Return ONLY the JSON array.`
-      );
-      const parsed = extractJSON(data);
-      if (parsed) setProspects(parsed);
-      else showToast("Could not parse Notion data", "err");
+      const data = await apiFetch("GET");
+      setProspects(data);
     } catch {
       showToast("Failed to connect to Notion", "err");
     }
@@ -146,29 +122,14 @@ export default function Pipeline() {
   async function save() {
     setSaving(true);
     try {
-      const props = `
-Name: ${JSON.stringify(form.Name || "")}
-Company: ${JSON.stringify(form.Company || "")}
-Status (select): ${JSON.stringify(form.Status || "Cold")}
-Pain Point (multi_select): ${JSON.stringify(form.PainPoint || [])}
-Revenue Range (select): ${JSON.stringify(form.RevenueRange || null)}
-Source (select): ${JSON.stringify(form.Source || null)}
-Probability (select): ${JSON.stringify(form.Probability || null)}
-Estimated Value (number): ${form.EstimatedValue ?? "null"}
-Email: ${JSON.stringify(form.Email || "")}
-Contact phone_number: ${JSON.stringify(form.Contact || "")}
-Notes: ${JSON.stringify(form.Notes || "")}
-Next Action text: ${JSON.stringify(form.NextAction || "")}
-Next Action Date (date, start): ${JSON.stringify(form.NextActionDate || null)}
-Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
       if (isNew) {
-        await notionCall(`Create a new page in the Notion Prospects database (data source ID: ${DB_ID}). Set these properties:\n${props}\nCreate the page now.`);
+        await apiFetch("POST", form);
         showToast("Prospect created ✓");
         closePanel();
         await fetchAll();
       } else {
-        await notionCall(`Update the Notion page at URL: ${selected.url}\nSet these properties:\n${props}\nUpdate now.`);
-        setProspects(prev => prev.map(p => p.url === selected.url ? { ...p, ...form } : p));
+        await apiFetch("PATCH", { id: selected.id, ...form });
+        setProspects(prev => prev.map(p => p.id === selected.id ? { ...p, ...form } : p));
         showToast("Saved to Notion ✓");
         closePanel();
       }
@@ -209,17 +170,17 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
         .pain-pill:hover { opacity: 0.8; }
         .col-scroll { overflow-y: auto; }
         .add-btn:hover { background: #f1f5f9 !important; border-color: #94a3b8 !important; color: #475569 !important; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
 
       {/* Header */}
       <div style={{ background: "#fff", borderBottom: "1px solid #e2e8f0", padding: "0 24px", height: 170, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <img src="/logo-01.png" alt="CaribbeanBiz" style={{ height: 150, width: "auto", objectFit: "contain", display: "block" }} />
-          <div style={{ width: 1, height: 24, background: "#e2e8f0" }} />
+          <div style={{ width: 1, height: 40, background: "#e2e8f0" }} />
           <span style={{ fontSize: 13, fontWeight: 600, color: "#64748b", letterSpacing: "0.04em" }}>CLIENT PIPELINE</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          {/* Stats */}
           <div style={{ display: "flex", gap: 16, marginRight: 8 }}>
             <div style={{ textAlign: "right" }}>
               <div style={{ fontSize: 10, color: "#94a3b8", fontWeight: 600, letterSpacing: "0.06em" }}>PIPELINE VALUE</div>
@@ -230,13 +191,11 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
               <div style={{ fontSize: 13, fontWeight: 700, color: "#16a34a" }}>{closedWon}</div>
             </div>
           </div>
-          {/* Search */}
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..." style={{ ...inputStyle, width: 180, fontSize: 12 }} />
           <button className="sync-btn" onClick={fetchAll} disabled={loading} style={{ background: "none", border: "1px solid #e2e8f0", color: "#64748b", padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: loading ? "not-allowed" : "pointer", display: "flex", alignItems: "center", gap: 6, transition: "all 0.15s" }}>
             <span style={{ display: "inline-block", animation: loading ? "spin 1s linear infinite" : "none" }}>↻</span>
             {loading ? "Syncing" : "Sync"}
           </button>
-          <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
         </div>
       </div>
 
@@ -247,18 +206,15 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
           const bg = STAGE_BG[stage];
           const cards = stageMap[stage] || [];
           return (
-            <div key={stage} style={{ minWidth: 220, maxWidth: 220, flexShrink: 0, display: "flex", flexDirection: "column", height: "calc(100vh - 100px)" }}>
-              {/* Col header */}
+            <div key={stage} style={{ minWidth: 220, maxWidth: 220, flexShrink: 0, display: "flex", flexDirection: "column", height: "calc(100vh - 210px)" }}>
               <div style={{ background: bg, border: `1px solid ${color}25`, borderRadius: "10px 10px 0 0", padding: "10px 12px", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: color, flexShrink: 0 }} />
                 <span style={{ fontSize: 11, fontWeight: 600, color: color, flex: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{stage}</span>
                 <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", background: color, padding: "1px 8px", borderRadius: 10, flexShrink: 0 }}>{cards.length}</span>
               </div>
-
-              {/* Cards */}
               <div className="col-scroll" style={{ flex: 1, background: "#fff", border: `1px solid #e2e8f0`, borderTop: "none", borderRadius: "0 0 10px 10px", display: "flex", flexDirection: "column", gap: 0, paddingBottom: 8, overflow: "auto" }}>
-                {cards.map((p, i) => (
-                  <div key={p.url} className="card" onClick={() => openExisting(p)}
+                {cards.map(p => (
+                  <div key={p.id} className="card" onClick={() => openExisting(p)}
                     style={{ margin: "8px 8px 0", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 8, padding: "11px 12px", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" }}>
                     <div style={{ display: "flex", alignItems: "flex-start", gap: 9, marginBottom: 8 }}>
                       <Avatar name={p.Name} />
@@ -276,7 +232,7 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
                     )}
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       {p.RevenueRange && <span style={{ fontSize: 10, color: "#94a3b8" }}>{p.RevenueRange}</span>}
-                      {p.Probability && <span style={{ fontSize: 10, fontWeight: 600, color: color, marginLeft: "auto" }}>{p.Probability}</span>}
+                      {p.Probability && <span style={{ fontSize: 10, fontWeight: 600, color, marginLeft: "auto" }}>{p.Probability}</span>}
                     </div>
                     {p.NextAction && (
                       <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #f1f5f9", fontSize: 10, color: "#94a3b8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
@@ -300,7 +256,6 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
         <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex" }}>
           <div onClick={closePanel} style={{ flex: 1, background: "rgba(15,23,42,0.3)", backdropFilter: "blur(4px)" }} />
           <div style={{ width: 440, background: "#fff", borderLeft: "1px solid #e2e8f0", display: "flex", flexDirection: "column", overflow: "hidden", boxShadow: "-8px 0 32px rgba(0,0,0,0.08)" }}>
-            {/* Panel header */}
             <div style={{ padding: "18px 22px", borderBottom: "1px solid #f1f5f9", display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
               {!isNew && <Avatar name={form.Name} />}
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -316,8 +271,6 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
               )}
               <button onClick={closePanel} style={{ background: "none", border: "none", color: "#94a3b8", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: 4, borderRadius: 4, flexShrink: 0 }}>×</button>
             </div>
-
-            {/* Form */}
             <div style={{ flex: 1, overflowY: "auto", padding: "20px 22px", display: "flex", flexDirection: "column", gap: 16 }}>
               <Field label="Stage">
                 <Select value={form.Status} onChange={v => upd("Status", v)} options={STAGES} />
@@ -382,8 +335,6 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
                 <textarea value={form.Notes ?? ""} onChange={e => upd("Notes", e.target.value)} rows={4} placeholder="Discovery notes, pain details..." style={{ ...inputStyle, resize: "vertical", lineHeight: 1.5 }} />
               </Field>
             </div>
-
-            {/* Footer */}
             <div style={{ padding: "14px 22px", borderTop: "1px solid #f1f5f9", display: "flex", gap: 10, flexShrink: 0, background: "#fafafa" }}>
               <button className="save-btn" onClick={save} disabled={saving}
                 style={{ flex: 1, background: saving ? "#94a3b8" : "#3b82f6", color: "#fff", border: "none", padding: "10px", borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: saving ? "not-allowed" : "pointer", fontFamily: "'Inter', sans-serif", transition: "all 0.15s" }}>
@@ -398,7 +349,6 @@ Last Contact (date, start): ${JSON.stringify(form.LastContact || null)}`;
         </div>
       )}
 
-      {/* Toast */}
       {toast && (
         <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: toast.type === "err" ? "#fef2f2" : "#f0fdf4", border: `1px solid ${toast.type === "err" ? "#fca5a5" : "#86efac"}`, color: toast.type === "err" ? "#dc2626" : "#16a34a", padding: "10px 20px", borderRadius: 10, fontSize: 13, fontWeight: 500, zIndex: 200, boxShadow: "0 4px 16px rgba(0,0,0,0.08)", whiteSpace: "nowrap" }}>
           {toast.msg}
