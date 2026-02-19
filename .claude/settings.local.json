@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/hiremg/Desktop/CaribbeanBiz/CaribbeanBiz\\\\ Repo/caribbeanbiz-website remote:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}
