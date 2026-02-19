@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { logout, getUser } from "../utils/auth";
 
 const STAGES = ["Cold","Contacted","Meeting Scheduled","Diagnostic Proposed","Proposal Sent","Negotiating","Closed-Won","Closed-Lost"];
 const STAGE_COLORS = {
@@ -83,6 +85,8 @@ function Avatar({ name }) {
 }
 
 export default function Pipeline() {
+  const navigate = useNavigate();
+  const currentUser = getUser();
   const [prospects, setProspects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -195,6 +199,17 @@ export default function Pipeline() {
           <button className="sync-btn" onClick={fetchAll} disabled={loading} style={{ background: "none", border: "1px solid #e2e8f0", color: "#64748b", padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: loading ? "not-allowed" : "pointer", display: "flex", alignItems: "center", gap: 6, transition: "all 0.15s" }}>
             <span style={{ display: "inline-block", animation: loading ? "spin 1s linear infinite" : "none" }}>↻</span>
             {loading ? "Syncing" : "Sync"}
+          </button>
+          <div style={{ width: 1, height: 28, background: "#e2e8f0" }} />
+          {currentUser && (
+            <span style={{ fontSize: 12, color: "#64748b", fontWeight: 500 }}>
+              {currentUser.name || currentUser.email}
+            </span>
+          )}
+          <button onClick={() => { logout(); navigate('/login'); }} style={{ background: "none", border: "1px solid #e2e8f0", color: "#94a3b8", padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 500, cursor: "pointer", transition: "all 0.15s" }}
+            onMouseEnter={e => { e.target.style.borderColor = '#c41e3a'; e.target.style.color = '#c41e3a'; }}
+            onMouseLeave={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.color = '#94a3b8'; }}>
+            Sign out
           </button>
         </div>
       </div>
