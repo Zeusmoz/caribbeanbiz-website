@@ -1,5 +1,5 @@
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
-const DB_ID = "18850a8a-a8cd-48fe-b362-0f0ab3d9bbd1";
+const DB_ID = "80f92d24-9eb7-4978-bfe5-a835191fcc99";
 
 function extractText(prop) {
   if (!prop) return null;
