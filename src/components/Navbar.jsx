@@ -30,7 +30,7 @@ export default function Navbar({ onOpenModal }) {
               {/* Logo */}
               <a href="#" className="logo-container group flex items-center overflow-hidden" style={{ height: '70px' }}>
                 <img
-                  src="/assets/CaribbeanBiz%20Logo-02.png"
+                  src="/assets/logo-02.png"
                   alt="CaribbeanBiz"
                   className="logo-icon"
                   style={{ height: '290px', width: 'auto', flexShrink: 0 }}
@@ -64,6 +64,22 @@ export default function Navbar({ onOpenModal }) {
                 >
                   <span className="text-sm font-semibold">{t.nav.bookAudit}</span>
                 </button>
+
+                {/* Planes */}
+                <a
+                  href="/planes"
+                  className="px-5 py-2.5 rounded-full border border-burgundy text-burgundy text-sm font-semibold hover:bg-burgundy hover:text-cream transition-all duration-300"
+                >
+                  Ver planes
+                </a>
+
+                {/* Client Portal */}
+                <a
+                  href="/client-login"
+                  className="px-5 py-2.5 rounded-full bg-burgundy text-cream text-sm font-semibold hover:bg-burgundy/80 transition-all duration-300"
+                >
+                  Client Login
+                </a>
               </div>
 
               {/* Mobile hamburger */}
@@ -114,10 +130,18 @@ export default function Navbar({ onOpenModal }) {
 
           <button
             onClick={() => { onOpenModal(); closeMobile() }}
-            className="px-8 py-3 rounded-full bg-burgundy text-cream font-semibold"
+            className="px-8 py-3 rounded-full border border-burgundy text-burgundy font-semibold"
           >
             {t.nav.bookStrategicAudit}
           </button>
+
+          <a
+            href="/client-login"
+            onClick={closeMobile}
+            className="px-8 py-3 rounded-full bg-burgundy text-cream font-semibold"
+          >
+            Client Login
+          </a>
         </div>
       )}
     </>

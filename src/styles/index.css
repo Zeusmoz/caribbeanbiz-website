@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === PORTAL THEME VARIABLES === */
+
+/* Dark theme (default — 18:00–06:59) */
+:root,
+html.dark {
+  --portal-bg:          #0a0a0a;
+  --portal-surface:     #111111;
+  --portal-surface2:    #0a0a0a;
+  --portal-border:      rgba(255,255,255,0.08);
+  --portal-border2:     rgba(255,255,255,0.05);
+  --portal-text:        #f5f0e8;
+  --portal-text-muted:  rgba(245,240,232,0.5);
+  --portal-text-dim:    rgba(245,240,232,0.3);
+  --portal-accent:      #8B0023;
+  --portal-accent-bg:   rgba(139,0,35,0.15);
+  --portal-nav-bg:      rgba(26,26,26,0.85);
+}
+
+/* Light theme (07:00–17:59) */
+html.light {
+  --portal-bg:          #f5f0e8;
+  --portal-surface:     #ffffff;
+  --portal-surface2:    #f0ebe0;
+  --portal-border:      rgba(0,0,0,0.08);
+  --portal-border2:     rgba(0,0,0,0.05);
+  --portal-text:        #1a1a1a;
+  --portal-text-muted:  rgba(26,26,26,0.55);
+  --portal-text-dim:    rgba(26,26,26,0.35);
+  --portal-accent:      #8B0023;
+  --portal-accent-bg:   rgba(139,0,35,0.08);
+  --portal-nav-bg:      rgba(245,240,232,0.9);
+}
+
 /* === BASE OVERRIDES === */
 * {
   box-sizing: border-box;
