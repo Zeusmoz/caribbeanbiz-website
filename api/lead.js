@@ -84,8 +84,8 @@ export default async function handler(req, res) {
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <div class="logo" style="font-size:24px;font-weight:800;color:#F5F0DC;text-align:center;">Caribbean<span style="color:#C4285A;">Biz</span></div>
+    <div class="header" style="text-align:center;margin-bottom:32px;">
+      <img src="https://www.caribbeanbiz.com/logo-email.png" alt="CaribbeanBiz" width="180" style="width:180px;height:auto;" />
     </div>
     
     <div class="card">
