@@ -49,6 +49,10 @@ export default function ContactModal({ isOpen, onClose }) {
         body: JSON.stringify(formData),
       })
       if (res.ok) {
+        // Fire Meta Pixel Lead event on successful form submission
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'Lead')
+        }
         setSubmitState('success')
         setTimeout(() => {
           onClose()
