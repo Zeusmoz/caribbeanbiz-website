@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     body { margin: 0; padding: 0; background: #0a0a0f; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     .container { max-width: 600px; margin: 0 auto; padding: 40px 24px; }
     .header { text-align: center; margin-bottom: 32px; }
-    .logo { font-size: 24px; font-weight: 800; color: #F5F0DC; }
+    .logo { font-size: 24px; font-weight: 800; color: #F5F0DC; text-align: center; letter-spacing: 0.5px; }
     .logo span { color: #C4285A; }
     .card { background: #12121a; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 40px 32px; margin-bottom: 24px; }
     h1 { color: #F5F0DC; font-size: 24px; margin: 0 0 16px; }
@@ -85,7 +85,7 @@ export default async function handler(req, res) {
 <body>
   <div class="container">
     <div class="header">
-      <div class="logo">Caribbean<span>Biz</span></div>
+      <div class="logo" style="font-size:24px;font-weight:800;color:#F5F0DC;text-align:center;">Caribbean<span style="color:#C4285A;">Biz</span></div>
     </div>
     
     <div class="card">
@@ -114,7 +114,7 @@ export default async function handler(req, res) {
       </div>
 
       <div style="text-align: center;">
-        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0?gv=true" class="cta-btn">📅 Agendar mi consulta gratuita</a>
+        <a href="https://cal.com/edwingrullon" class="cta-btn">📅 Agendar mi consulta gratuita</a>
       </div>
 
       <hr class="divider">
