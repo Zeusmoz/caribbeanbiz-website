@@ -140,18 +140,16 @@ export default function Planes() {
       source: 'caribbeanbiz-planes',
     }
     try {
-      const webhookUrl = form.dataset.webhook
-      if (webhookUrl) {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        })
-      }
-      const leads = JSON.parse(localStorage.getItem('cbiz_leads') || '[]')
-      leads.push(data)
-      localStorage.setItem('cbiz_leads', JSON.stringify(leads))
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
     } catch (_) { /* silent */ }
+    // Always save locally as backup
+    const leads = JSON.parse(localStorage.getItem('cbiz_leads') || '[]')
+    leads.push(data)
+    localStorage.setItem('cbiz_leads', JSON.stringify(leads))
     setSubmitted(true)
   }, [])
 
