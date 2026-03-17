@@ -46,7 +46,8 @@ export function useTheme() {
     const next = dark ? 'light' : 'dark'
     localStorage.setItem(STORAGE_KEY, next)
     setOverride(next)
-  }, [dark])
+    apply(next === 'dark')
+  }, [dark, apply])
 
   const resetToAuto = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY)
