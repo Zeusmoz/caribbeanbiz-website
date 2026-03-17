@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import Navbar from '../components/Navbar'
-import { useTheme } from '../hooks/useTheme'
 import Hero from '../components/Hero'
 import About from '../components/About'
 import Challenges from '../components/Challenges'
@@ -15,7 +14,6 @@ import WhatsAppButton from '../components/WhatsAppButton'
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { dark, toggle: toggleTheme } = useTheme()
 
   const openModal  = useCallback(() => setIsModalOpen(true),  [])
   const closeModal = useCallback(() => setIsModalOpen(false), [])
@@ -23,7 +21,7 @@ export default function Home() {
   return (
     <>
       <div className="noise-bg" aria-hidden="true" />
-      <Navbar onOpenModal={openModal} dark={dark} onToggleTheme={toggleTheme} />
+      <Navbar onOpenModal={openModal} />
       <main>
         <Hero onOpenModal={openModal} />
         <About />
