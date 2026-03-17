@@ -7,14 +7,14 @@ export default {
   hero: {
     badge: 'Operational Value Engineering — Dominican Republic',
     line1: 'Your business works', line2: 'for you.', line3: 'Not the other way around.',
-    subtitle: 'We transform owner-dependent SMBs into businesses that run on systems — operational diagnostic, restructuring, AI automation, and documented results.',
+    subtitle: 'We transform owner-dependent businesses into organizations that run on systems — operational diagnostic, restructuring, AI automation, and documented results.',
     cta1: 'Book OVE Diagnostic', cta2: 'See The Process',
   },
   about: {
     label: 'What We Do',
-    heading: 'We transform Caribbean SMBs into businesses that run without depending on the owner.',
+    heading: 'We transform Caribbean businesses into organizations that run without depending on the owner.',
     p1: 'CaribbeanBiz operates at the intersection of strategic consulting, technology implementation, and AI automation. We don\'t just advise — we execute, structure, and transform.',
-    p2: 'Based in the Dominican Republic, we understand the real challenges of SMBs in the region. Our OVE framework combines financial diagnostics, operational restructuring, and AI into one structured process.',
+    p2: 'Based in the Dominican Republic, we understand the real challenges of businesses in the region. Our OVE framework combines financial diagnostics, operational restructuring, and AI into one structured process.',
     badgeTitle: 'Execution Included', badgeSub: 'Measurable results, not presentations',
     steps: [
       { num: '01', title: 'OVE Diagnostic', desc: 'Deep audit with OVE Score across 6 dimensions: operations, finance, technology, owner dependency, market, and scalability.' },
@@ -24,10 +24,10 @@ export default {
   },
   challenges: {
     label: 'The Problem',
-    heading1: 'Why the SMB Owner', heading2: 'Can\'t Take a Day Off',
+    heading1: 'Why the Business Owner', heading2: 'Can\'t Take a Day Off',
     items: [
       { title: 'Total Owner Dependency', description: 'Everything goes through the owner. Without them, the business stops. It can\'t grow, be sold, or survive a transition.' },
-      { title: '70%+ Manual Operations', description: 'Undocumented processes, improvised decisions, and workflows that live inside one person\'s head.' },
+      { title: 'Mostly Manual Operations', description: 'Undocumented processes, improvised decisions, and workflows that live inside one person\'s head.' },
       { title: 'No Financial Visibility', description: 'No P&L by unit, no dashboards, no way to know which areas are profitable and which aren\'t.' },
       { title: 'No Technology or Disconnected Tech', description: 'No CRM, no automations, no channel integration. Everything managed through WhatsApp and Excel sheets.' },
       { title: 'Stagnant Growth', description: 'The business grows as far as the owner\'s energy reaches — and stops there. No system to take it further.' },
@@ -61,7 +61,7 @@ export default {
   acquisition: {
     label: 'Why CaribbeanBiz',
     heading1: 'What Nobody Else', heading2: 'Has in the DR',
-    p: 'We don\'t sell generic consulting. The OVE Score is a proprietary framework — the only one in the Dominican Republic that measures an SMB\'s operational health across 6 dimensions with a concrete number.',
+    p: 'We don\'t sell generic consulting. The OVE Score is a proprietary framework — the only one in the Dominican Republic that measures a business\'s operational health across 6 dimensions with a concrete number.',
     steps: [
       { title: 'Proprietary OVE Score', desc: 'A 6-dimension framework unique to the DR. Diagnosis with a number, not opinions. Before and after documented.' },
       { title: 'Technology + Execution', desc: 'We don\'t just tell you what to do — we implement it. AI, dashboards, CRM. Our team stays with you until results are visible.' },
@@ -76,7 +76,7 @@ export default {
     criteria: [
       { label: 'Revenue', value: 'RD$5M - 100M/year' },
       { label: 'Employees', value: '10 - 100' },
-      { label: 'Operations', value: '70%+ Manual' },
+      { label: 'Operations', value: 'Mostly Manual' },
       { label: 'Industries', value: 'Services, Retail, Health, Construction' },
       { label: 'Location', value: 'Dominican Republic & The Caribbean' },
     ],

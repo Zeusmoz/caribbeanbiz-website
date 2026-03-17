@@ -7,14 +7,14 @@ export default {
   hero: {
     badge: 'Ingeniería de Valor Operacional — República Dominicana',
     line1: 'Tu negocio trabaja', line2: 'para ti.', line3: 'No al revés.',
-    subtitle: 'Transformamos PYMEs dependientes del dueño en empresas que funcionan con sistemas — diagnóstico operacional, reestructuración, automatización con IA y resultados documentados.',
+    subtitle: 'Transformamos empresas dependientes del dueño en organizaciones que funcionan con sistemas — diagnóstico operacional, reestructuración, automatización con IA y resultados documentados.',
     cta1: 'Agendar Diagnóstico OVE', cta2: 'Ver el Proceso',
   },
   about: {
     label: 'Qué Hacemos',
-    heading: 'Transformamos PYMEs caribeñas en empresas que funcionan sin depender del dueño.',
+    heading: 'Transformamos empresas caribeñas en organizaciones que funcionan sin depender del dueño.',
     p1: 'CaribbeanBiz opera en la intersección de la consultoría estratégica, la implementación tecnológica y la automatización con IA. No solo asesoramos — ejecutamos, estructuramos y transformamos.',
-    p2: 'Con sede en República Dominicana, entendemos los desafíos reales de las PYMEs de la región. Nuestro framework OVE combina diagnóstico financiero, reestructuración operacional e IA en un solo proceso estructurado.',
+    p2: 'Con sede en República Dominicana, entendemos los desafíos reales de las empresas de la región. Nuestro framework OVE combina diagnóstico financiero, reestructuración operacional e IA en un solo proceso estructurado.',
     badgeTitle: 'Ejecución incluida', badgeSub: 'Resultados medibles, no presentaciones',
     steps: [
       { num: '01', title: 'Diagnóstico OVE', desc: 'Auditoría profunda con OVE Score en 6 dimensiones: operaciones, finanzas, tecnología, dependencia, mercado y escalabilidad.' },
@@ -24,10 +24,10 @@ export default {
   },
   challenges: {
     label: 'El Problema',
-    heading1: 'Por Qué el Dueño de PYME', heading2: 'No Puede Tomarse un Día Libre',
+    heading1: 'Por Qué el Dueño de Empresa', heading2: 'No Puede Tomarse un Día Libre',
     items: [
       { title: 'Dependencia Total del Dueño', description: 'Todo pasa por el dueño. Sin él, el negocio se detiene. No puede crecer, venderse ni sobrevivir una transición.' },
-      { title: 'Operaciones 70% Manuales', description: 'Procesos sin documentar, decisiones improvisadas y flujos de trabajo que viven en la cabeza de una persona.' },
+      { title: 'Operaciones Mayormente Manuales', description: 'Procesos sin documentar, decisiones improvisadas y flujos de trabajo que viven en la cabeza de una persona.' },
       { title: 'Sin Visibilidad Financiera', description: 'No hay P&L por unidad, no hay dashboards, no hay forma de saber qué áreas son rentables y cuáles no.' },
       { title: 'Tecnología Inexistente o Desconectada', description: 'Sin CRM, sin automatizaciones, sin integración entre canales. Todo se maneja por WhatsApp y hojas de Excel.' },
       { title: 'Crecimiento Estancado', description: 'El negocio crece hasta donde llega la energía del dueño — y ahí se queda. No hay sistema que lo lleve más lejos.' },
@@ -61,7 +61,7 @@ export default {
   acquisition: {
     label: 'Por Qué CaribbeanBiz',
     heading1: 'Lo Que Nadie Más', heading2: 'Tiene en RD',
-    p: 'No vendemos consultorías genéricas. El OVE Score es un framework propietario — el único en República Dominicana que mide la salud operacional de una PYME en 6 dimensiones con un número concreto.',
+    p: 'No vendemos consultorías genéricas. El OVE Score es un framework propietario — el único en República Dominicana que mide la salud operacional de una empresa en 6 dimensiones con un número concreto.',
     steps: [
       { title: 'OVE Score Propietario', desc: 'Framework de 6 dimensiones único en RD. Diagnóstico con número, no con opiniones. Antes y después documentado.' },
       { title: 'Tecnología + Ejecución', desc: 'No solo decimos qué hacer — lo implementamos. IA, dashboards, CRM. El equipo se queda contigo hasta ver los resultados.' },
@@ -76,7 +76,7 @@ export default {
     criteria: [
       { label: 'Ingresos', value: 'RD$5M - 100M/año' },
       { label: 'Empleados', value: '10 - 100' },
-      { label: 'Operaciones', value: '70%+ Manuales' },
+      { label: 'Operaciones', value: 'Mayormente Manuales' },
       { label: 'Industrias', value: 'Servicios, Retail, Salud, Construcción' },
       { label: 'Ubicación', value: 'República Dominicana y el Caribe' },
     ],
