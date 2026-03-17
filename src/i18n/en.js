@@ -64,13 +64,13 @@ export default {
     p: 'We don\'t sell generic consulting. The OVE Score is a proprietary framework — the only one in the Dominican Republic that measures an SMB\'s operational health across 6 dimensions with a concrete number.',
     steps: [
       { title: 'Proprietary OVE Score', desc: 'A 6-dimension framework unique to the DR. Diagnosis with a number, not opinions. Before and after documented.' },
-      { title: 'Technology + Execution', desc: 'We don\'t just tell you what to do — we implement it. AI, dashboards, CRM. Our team stays 6+ months executing.' },
+      { title: 'Technology + Execution', desc: 'We don\'t just tell you what to do — we implement it. AI, dashboards, CRM. Our team stays with you until results are visible.' },
       { title: 'Documented ROI', desc: 'The result is measurable. Initial vs final OVE Score. No smoke, no vague promises.' },
     ],
     metrics: [
       { value: '5', label: 'OVE Phases' },
       { value: '6', label: 'Score Dimensions' },
-      { value: '6+', label: 'Months of Execution' },
+      { value: '3', label: 'Months to Notable Results' },
     ],
     criteriaTitle: 'Businesses We Serve',
     criteria: [
@@ -85,7 +85,7 @@ export default {
   why: {
     heading: 'Why CaribbeanBiz?',
     items: [
-      { title: 'Execution Included', description: 'We don\'t hand you a PDF and walk away. We stay 6+ months implementing alongside you.' },
+      { title: 'Execution Included', description: "We don't hand you a PDF and walk away. In 3 months there are already notable changes — and we stay with you until the end." },
       { title: 'AI Integrated', description: 'Real automation as part of the solution, not an add-on. AI agents that work 24/7.' },
       { title: 'Measurable Results', description: 'Initial vs final OVE Score. ROI documented per finding. No unsupported promises.' },
       { title: 'Proprietary Framework', description: 'The OVE Score is ours. Nobody else in the DR has this level of structured diagnostic.' },

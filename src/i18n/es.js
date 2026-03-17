@@ -64,13 +64,13 @@ export default {
     p: 'No vendemos consultorías genéricas. El OVE Score es un framework propietario — el único en República Dominicana que mide la salud operacional de una PYME en 6 dimensiones con un número concreto.',
     steps: [
       { title: 'OVE Score Propietario', desc: 'Framework de 6 dimensiones único en RD. Diagnóstico con número, no con opiniones. Antes y después documentado.' },
-      { title: 'Tecnología + Ejecución', desc: 'No solo decimos qué hacer — lo implementamos. IA, dashboards, CRM. El equipo se queda 6+ meses ejecutando.' },
+      { title: 'Tecnología + Ejecución', desc: 'No solo decimos qué hacer — lo implementamos. IA, dashboards, CRM. El equipo se queda contigo hasta ver los resultados.' },
       { title: 'ROI Documentado', desc: 'El resultado es medible. OVE Score inicial vs final. Sin humo, sin promesas vagas.' },
     ],
     metrics: [
       { value: '5', label: 'Fases OVE' },
       { value: '6', label: 'Dimensiones del Score' },
-      { value: '6+', label: 'Meses de Ejecución' },
+      { value: '3', label: 'Meses a Resultados Notables' },
     ],
     criteriaTitle: 'Empresas que Atendemos',
     criteria: [
@@ -85,7 +85,7 @@ export default {
   why: {
     heading: '¿Por Qué CaribbeanBiz?',
     items: [
-      { title: 'Ejecución Incluida', description: 'No entregamos un PDF y nos vamos. Nos quedamos 6+ meses implementando contigo.' },
+      { title: 'Ejecución Incluida', description: 'No entregamos un PDF y nos vamos. En 3 meses ya hay cambios notables — y seguimos contigo hasta el final.' },
       { title: 'IA Integrada', description: 'Automatización real como parte de la solución, no un add-on. Agentes de IA que trabajan 24/7.' },
       { title: 'Resultados Medibles', description: 'OVE Score inicial vs final. ROI documentado por hallazgo. Sin promesas sin respaldo.' },
       { title: 'Framework Propietario', description: 'El OVE Score es nuestro. Nadie más en RD tiene este nivel de diagnóstico estructurado.' },
