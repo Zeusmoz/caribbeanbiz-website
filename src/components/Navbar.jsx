@@ -65,14 +65,6 @@ export default function Navbar({ onOpenModal }) {
                   <span className="text-sm font-semibold">{t.nav.bookAudit}</span>
                 </button>
 
-                {/* Planes */}
-                <a
-                  href="/planes"
-                  className="px-5 py-2.5 rounded-full border border-burgundy text-burgundy text-sm font-semibold hover:bg-burgundy hover:text-cream transition-all duration-300"
-                >
-                  Ver planes
-                </a>
-
                 {/* Client Portal */}
                 <a
                   href="/client-login"
