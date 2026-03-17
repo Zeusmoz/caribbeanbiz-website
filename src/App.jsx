@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
-import { useTheme } from './hooks/useTheme'
 import Home from './pages/Home'
 import Pipeline from './pages/Pipeline'
 import Login from './pages/Login'
@@ -20,7 +19,6 @@ function ClientProtectedRoute({ children }) {
 }
 
 function AppInner() {
-  useTheme() // applies dark/light class to <html> based on hour + manual override
   return (
     <Routes>
       {/* Public */}

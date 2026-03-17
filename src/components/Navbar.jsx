@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { useNavbarScroll } from '../hooks/useNavbarScroll'
 import { useTranslation } from '../contexts/LanguageContext'
-import { useTheme } from '../hooks/useTheme'
 
-export default function Navbar({ onOpenModal }) {
+export default function Navbar({ onOpenModal, dark, onToggleTheme }) {
   const isVisible = useNavbarScroll(100)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const { t, lang, toggle } = useTranslation()
-  const { dark, toggle: toggleTheme } = useTheme()
 
   const NAV_LINKS = [
     { label: t.nav.about,       href: 'about'       },
@@ -53,7 +51,7 @@ export default function Navbar({ onOpenModal }) {
 
                 {/* Theme Toggle */}
                 <button
-                  onClick={toggleTheme}
+                  onClick={onToggleTheme}
                   className="w-9 h-9 rounded-full border border-cream/20 flex items-center justify-center text-cream/70 hover:border-burgundy hover:text-burgundy transition-all duration-300"
                   aria-label="Toggle theme"
                 >
@@ -133,7 +131,7 @@ export default function Navbar({ onOpenModal }) {
           ))}
 
           <button
-            onClick={toggleTheme}
+            onClick={onToggleTheme}
             className="w-12 h-12 rounded-full border border-cream/30 flex items-center justify-center text-cream/70"
             aria-label="Toggle theme"
           >
