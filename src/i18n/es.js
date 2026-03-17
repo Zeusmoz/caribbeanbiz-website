@@ -1,6 +1,6 @@
 export default {
   nav: {
-    about: 'Nosotros', challenges: 'El Problema', methodology: 'El Proceso',
+    about: 'Nosotros', challenges: 'Problema', methodology: 'Proceso',
     services: 'Servicios', acquisition: 'Resultados',
     bookAudit: 'Agendar Diagnóstico', bookStrategicAudit: 'Agendar Diagnóstico OVE',
   },
